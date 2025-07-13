@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternLink Platform - Get Started</title>
+    <link rel="stylesheet" href="platform-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="platform-header">
+        <div class="container">
+            <div class="nav-brand">
+                <div class="logo">
+                    <span>IL</span>
+                </div>
+                <span class="brand-name">InternLink</span>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i data-lucide="sun" class="theme-icon"></i>
+                </button>
+                <a href="/" class="btn btn-outline btn-sm">Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="platform-main">
+        <!-- Authentication Section -->
+        <section id="authSection" class="auth-section">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-header">
+                        <h1 class="auth-title">Welcome to InternLink</h1>
+                        <p class="auth-subtitle">Connect with opportunities that match your goals</p>
+                    </div>
+
+                    <!-- Auth Toggle -->
+                    <div class="auth-toggle">
+                        <button class="auth-tab active" data-tab="signin">Sign In</button>
+                        <button class="auth-tab" data-tab="signup">Sign Up</button>
+                    </div>
+
+                    <!-- Sign In Form -->
+                    <form id="signinForm" class="auth-form active">
+                        <div class="form-group">
+                            <label for="signinEmail">Email Address</label>
+                            <input type="email" id="signinEmail" required>
+                            <span class="error-message" id="signinEmailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="signinPassword">Password</label>
+                            <input type="password" id="signinPassword" required>
+                            <span class="error-message" id="signinPasswordError"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span class="btn-text">Sign In</span>
+                            <div class="btn-loader hidden">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                        <p class="auth-link">Don't have an account? <a href="#" data-tab="signup">Sign up here</a></p>
+                    </form>
+
+                    <!-- Sign Up Form -->
+                    <form id="signupForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="signupName">Full Name</label>
+                            <input type="text" id="signupName" required>
+                            <span class="error-message" id="signupNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email Address</label>
+                            <input type="email" id="signupEmail" required>
+                            <span class="error-message" id="signupEmailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" required>
+                            <span class="error-message" id="signupPasswordError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" required>
+                            <span class="error-message" id="confirmPasswordError"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span class="btn-text">Create Account</span>
+                            <div class="btn-loader hidden">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                        <p class="auth-link">Already have an account? <a href="#" data-tab="signin">Sign in here</a></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Type Selection -->
+        <section id="userTypeSection" class="user-type-section hidden">
+            <div class="container">
+                <div class="user-type-container">
+                    <div class="section-header">
+                        <h2 class="section-title">How would you like to use InternLink?</h2>
+                        <p class="section-description">Choose your role to get started with the right experience</p>
+                    </div>
+
+                    <div class="user-type-cards">
+                        <div class="user-type-card" data-type="intern">
+                            <div class="card-icon">
+                                <i data-lucide="graduation-cap"></i>
+                            </div>
+                            <h3 class="card-title">I'm an Intern</h3>
+                            <p class="card-description">Looking for internship opportunities to gain experience and build my career</p>
+                            <ul class="card-features">
+                                <li><i data-lucide="check"></i>Submit your CV and skills</li>
+                                <li><i data-lucide="check"></i>Get matched with opportunities</li>
+                                <li><i data-lucide="check"></i>Connect with organizations</li>
+                            </ul>
+                            <button class="btn btn-primary btn-full">Continue as Intern</button>
+                        </div>
+
+                        <div class="user-type-card" data-type="organization">
+                            <div class="card-icon">
+                                <i data-lucide="building"></i>
+                            </div>
+                            <h3 class="card-title">I'm an Organization</h3>
+                            <p class="card-description">Looking to hire talented interns and build our team with fresh talent</p>
+                            <ul class="card-features">
+                                <li><i data-lucide="check"></i>Post internship roles</li>
+                                <li><i data-lucide="check"></i>Find qualified candidates</li>
+                                <li><i data-lucide="check"></i>Smart matching system</li>
+                            </ul>
+                            <button class="btn btn-primary btn-full">Continue as Organization</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Intern Form Section -->
+        <section id="internFormSection" class="form-section hidden">
+            <div class="container">
+                <div class="form-container">
+                    <div class="form-header">
+                        <button class="back-btn" id="backToUserType">
+                            <i data-lucide="arrow-left"></i>
+                            Back
+                        </button>
+                        <h2 class="form-title">Create Your Intern Profile</h2>
+                        <p class="form-subtitle">Tell us about yourself to get matched with the right opportunities</p>
+                    </div>
+
+                    <form id="internForm" class="submission-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="internName">Full Name *</label>
+                                <input type="text" id="internName" required>
+                                <span class="error-message" id="internNameError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="internEmail">Email Address *</label>
+                                <input type="email" id="internEmail" required>
+                                <span class="error-message" id="internEmailError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="educationLevel">Education Level *</label>
+                            <select id="educationLevel" required>
+                                <option value="">Select your education level</option>
+                                <option value="high-school">High School</option>
+                                <option value="undergraduate">Undergraduate</option>
+                                <option value="graduate">Graduate</option>
+                                <option value="postgraduate">Postgraduate</option>
+                            </select>
+                            <span class="error-message" id="educationLevelError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="skills">Skills *</label>
+                            <div class="tags-input-container">
+                                <div class="tags-display" id="skillsDisplay"></div>
+                                <input type="text" id="skillsInput" placeholder="Type a skill and press Enter">
+                            </div>
+                            <p class="form-help">Add your skills one by one. Press Enter after each skill.</p>
+                            <span class="error-message" id="skillsError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cvUpload">CV Upload *</label>
+                            <div class="file-upload-container">
+                                <input type="file" id="cvUpload" accept=".pdf,.doc,.docx" required>
+                                <div class="file-upload-display">
+                                    <i data-lucide="upload"></i>
+                                    <span class="upload-text">Click to upload your CV (PDF, DOC, DOCX)</span>
+                                    <span class="file-name hidden"></span>
+                                </div>
+                            </div>
+                            <span class="error-message" id="cvUploadError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="desiredRole">Desired Role / Field *</label>
+                            <input type="text" id="desiredRole" placeholder="e.g., Software Development, Marketing, Design" required>
+                            <span class="error-message" id="desiredRoleError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="openTo">Open To *</label>
+                            <select id="openTo" required>
+                                <option value="">Select preference</option>
+                                <option value="paid">Paid Internships Only</option>
+                                <option value="unpaid">Unpaid Internships Only</option>
+                                <option value="both">Both Paid and Unpaid</option>
+                            </select>
+                            <span class="error-message" id="openToError"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span class="btn-text">Submit Profile</span>
+                            <div class="btn-loader hidden">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Organization Form Section -->
+        <section id="organizationFormSection" class="form-section hidden">
+            <div class="container">
+                <div class="form-container">
+                    <div class="form-header">
+                        <button class="back-btn" id="backToUserTypeOrg">
+                            <i data-lucide="arrow-left"></i>
+                            Back
+                        </button>
+                        <h2 class="form-title">Post an Internship Role</h2>
+                        <p class="form-subtitle">Find the perfect intern for your organization</p>
+                    </div>
+
+                    <form id="organizationForm" class="submission-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="orgName">Organization Name *</label>
+                                <input type="text" id="orgName" required>
+                                <span class="error-message" id="orgNameError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="orgEmail">HR Email Address *</label>
+                                <input type="email" id="orgEmail" required>
+                                <span class="error-message" id="orgEmailError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="roleTitle">Role Title *</label>
+                            <input type="text" id="roleTitle" placeholder="e.g., Software Development Intern" required>
+                            <span class="error-message" id="roleTitleError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobDescription">Job Description *</label>
+                            <textarea id="jobDescription" rows="6" placeholder="Describe the role, responsibilities, and what the intern will learn..." required></textarea>
+                            <span class="error-message" id="jobDescriptionError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="requiredSkills">Required Skills *</label>
+                            <div class="tags-input-container">
+                                <div class="tags-display" id="requiredSkillsDisplay"></div>
+                                <input type="text" id="requiredSkillsInput" placeholder="Type a skill and press Enter">
+                            </div>
+                            <p class="form-help">Add required skills one by one. Press Enter after each skill.</p>
+                            <span class="error-message" id="requiredSkillsError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="internshipType">Internship Type *</label>
+                            <select id="internshipType" required>
+                                <option value="">Select internship type</option>
+                                <option value="paid">Paid</option>
+                                <option value="unpaid">Unpaid</option>
+                            </select>
+                            <span class="error-message" id="internshipTypeError"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span class="btn-text">Post Role</span>
+                            <div class="btn-loader hidden">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Section -->
+        <section id="successSection" class="success-section hidden">
+            <div class="container">
+                <div class="success-container">
+                    <div class="success-icon">
+                        <i data-lucide="check-circle"></i>
+                    </div>
+                    <h2 class="success-title" id="successTitle">Success!</h2>
+                    <p class="success-message" id="successMessage">Your submission has been processed successfully.</p>
+                    
+                    <!-- Matched Interns (for organizations) -->
+                    <div id="matchedInterns" class="matched-interns hidden">
+                        <h3 class="matches-title">Matched Interns</h3>
+                        <p class="matches-subtitle">Based on your required skills, here are some potential candidates:</p>
+                        <div class="interns-grid" id="internsGrid"></div>
+                    </div>
+
+                    <div class="success-actions">
+                        <button class="btn btn-primary" id="submitAnother">Submit Another</button>
+                        <a href="/" class="btn btn-outline">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="platform-script.js"></script>
+</body>
+</html>

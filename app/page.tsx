@@ -82,10 +82,10 @@ export default function InternLinkLanding() {
 
             <div className="relative">
               <Image
-                src="/placeholder.svg?height=500&width=600"
-                alt="African youth collaborating on technology projects"
+                src="/images/hero-collaboration.png"
+                alt="Diverse young professionals collaborating on technology projects in a modern workspace"
                 width={600}
-                height={500}
+                height={400}
                 className="rounded-2xl shadow-2xl"
               />
               <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-lg">
@@ -414,7 +414,7 @@ export default function InternLinkLanding() {
                 </li>
                 <li>
                   <Link href="#contact" className="hover:text-white transition-colors">
-                    Contact
+                    Contact Us
                   </Link>
                 </li>
                 <li>

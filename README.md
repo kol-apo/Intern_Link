@@ -21,7 +21,7 @@ Vanilla JavaScript/TypeScript (no frameworks) for logic
 
 ## Live Site
 You can access the platform here:
-https://your-deployed-link.com
+(https://v0-intern-link-landing-page.vercel.app/)
 
 ## Tech Stack
 TypeScript – Application logic

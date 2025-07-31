@@ -1,35 +1,47 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useToast } from "@/hooks/use-toast"
-import { ArrowLeft, Loader2 } from "lucide-react"
-import { SkillsInput } from "./skills-input"
-import type { User, OrganizationData } from "@/app/platform/page"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { SkillsInput } from "./skills-input";
+import { useAuth } from "@/lib/auth-context";
+import type { User, OrganizationData } from "@/app/platform/page";
 
 interface OrganizationFormProps {
-  currentUser: User | null
-  onSubmit: (data: OrganizationData) => void
-  onBack: () => void
+  currentUser: User | null;
+  onSubmit: (data: OrganizationData) => void;
+  onBack: () => void;
 }
 
-export function OrganizationForm({ currentUser, onSubmit, onBack }: OrganizationFormProps) {
-  const [isLoading, setIsLoading] = useState(false)
-  const [requiredSkills, setRequiredSkills] = useState<string[]>([])
-  const { toast } = useToast()
+export function OrganizationForm({
+  currentUser,
+  onSubmit,
+  onBack,
+}: OrganizationFormProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [requiredSkills, setRequiredSkills] = useState<string[]>([]);
+  const { toast } = useToast();
+  const { token } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsLoading(true)
+    e.preventDefault();
+    setIsLoading(true);
 
-    const formData = new FormData(e.currentTarget)
+    const formData = new FormData(e.currentTarget);
 
     const data: OrganizationData = {
       orgName: formData.get("orgName") as string,
@@ -38,7 +50,7 @@ export function OrganizationForm({ currentUser, onSubmit, onBack }: Organization
       jobDescription: formData.get("jobDescription") as string,
       requiredSkills,
       internshipType: formData.get("internshipType") as string,
-    }
+    };
 
     // Validation
     if (requiredSkills.length === 0) {
@@ -46,28 +58,75 @@ export function OrganizationForm({ currentUser, onSubmit, onBack }: Organization
         title: "Error",
         description: "Please add at least one required skill.",
         variant: "destructive",
-      })
-      setIsLoading(false)
-      return
+      });
+      setIsLoading(false);
+      return;
     }
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    try {
+      // Submit to backend API
+      const response = await fetch("/api/organization/role", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          orgName: data.orgName,
+          orgEmail: data.orgEmail,
+          roleTitle: data.roleTitle,
+          jobDescription: data.jobDescription,
+          requiredSkills: data.requiredSkills,
+          internshipType: data.internshipType,
+        }),
+      });
 
-    onSubmit(data)
-    setIsLoading(false)
-  }
+      const result = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: "Role Posted!",
+          description: "Your internship role has been posted successfully.",
+        });
+
+        // Call the original onSubmit to maintain the flow
+        onSubmit(data);
+      } else {
+        toast({
+          title: "Error",
+          description: result.error || "Failed to post role",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Role posting error:", error);
+      toast({
+        title: "Error",
+        description: "An error occurred while posting the role",
+        variant: "destructive",
+      });
+    }
+
+    setIsLoading(false);
+  };
 
   return (
     <div className="w-full max-w-2xl mx-auto px-4">
       <Card>
         <CardHeader>
-          <Button variant="ghost" size="sm" onClick={onBack} className="w-fit mb-4">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onBack}
+            className="w-fit mb-4"
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
           </Button>
           <CardTitle className="text-2xl">Post an Internship Role</CardTitle>
-          <p className="text-muted-foreground">Find the perfect intern for your organization</p>
+          <p className="text-muted-foreground">
+            Find the perfect intern for your organization
+          </p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -78,13 +137,24 @@ export function OrganizationForm({ currentUser, onSubmit, onBack }: Organization
               </div>
               <div className="space-y-2">
                 <Label htmlFor="orgEmail">HR Email Address *</Label>
-                <Input id="orgEmail" name="orgEmail" type="email" defaultValue={currentUser?.email || ""} required />
+                <Input
+                  id="orgEmail"
+                  name="orgEmail"
+                  type="email"
+                  defaultValue={currentUser?.email || ""}
+                  required
+                />
               </div>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="roleTitle">Role Title *</Label>
-              <Input id="roleTitle" name="roleTitle" placeholder="e.g., Software Development Intern" required />
+              <Input
+                id="roleTitle"
+                name="roleTitle"
+                placeholder="e.g., Software Development Intern"
+                required
+              />
             </div>
 
             <div className="space-y-2">
@@ -100,7 +170,10 @@ export function OrganizationForm({ currentUser, onSubmit, onBack }: Organization
 
             <div className="space-y-2">
               <Label>Required Skills *</Label>
-              <SkillsInput skills={requiredSkills} onSkillsChange={setRequiredSkills} />
+              <SkillsInput
+                skills={requiredSkills}
+                onSkillsChange={setRequiredSkills}
+              />
               <p className="text-sm text-muted-foreground">
                 Add required skills one by one. Press Enter after each skill.
               </p>
@@ -119,7 +192,12 @@ export function OrganizationForm({ currentUser, onSubmit, onBack }: Organization
               </Select>
             </div>
 
-            <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
+            <Button
+              type="submit"
+              className="w-full"
+              size="lg"
+              disabled={isLoading}
+            >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Post Role
             </Button>
@@ -127,5 +205,5 @@ export function OrganizationForm({ currentUser, onSubmit, onBack }: Organization
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

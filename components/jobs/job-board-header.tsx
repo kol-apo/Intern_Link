@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { LogOut, User } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { LogOut, User } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,29 +12,46 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
-interface JobBoardHeaderProps {
-  user: {
-    name: string
-    email: string
-  }
-}
+export function JobBoardHeader() {
+  const { user, logout } = useAuth();
 
-export function JobBoardHeader({ user }: JobBoardHeaderProps) {
   const handleLogout = () => {
-    // In a real app, this would handle logout logic
-    window.location.href = "/"
-  }
+    logout();
+    window.location.href = "/";
+  };
 
   const getInitials = (name: string) => {
     return name
       .split(" ")
-      .map((n) => n[0])
+      .map(n => n[0])
       .join("")
       .toUpperCase()
-      .slice(0, 2)
+      .slice(0, 2);
+  };
+
+  if (!user) {
+    return (
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between px-4 md:px-6">
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-amber-500 to-orange-600">
+              <span className="text-sm font-bold text-white">IL</span>
+            </div>
+            <span className="text-xl font-bold">InternLink</span>
+          </Link>
+
+          <div className="flex items-center space-x-4">
+            <ThemeToggle />
+            <Button variant="outline" asChild>
+              <Link href="/platform">Sign In</Link>
+            </Button>
+          </div>
+        </div>
+      </header>
+    );
   }
 
   return (
@@ -45,24 +63,6 @@ export function JobBoardHeader({ user }: JobBoardHeaderProps) {
           </div>
           <span className="text-xl font-bold">InternLink</span>
         </Link>
-
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link href="/jobs" className="text-sm font-medium hover:text-primary transition-colors">
-            Job Board
-          </Link>
-          <Link
-            href="/applications"
-            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-          >
-            My Applications
-          </Link>
-          <Link
-            href="/profile"
-            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-          >
-            Profile
-          </Link>
-        </nav>
 
         <div className="flex items-center space-x-4">
           <ThemeToggle />
@@ -80,8 +80,15 @@ export function JobBoardHeader({ user }: JobBoardHeaderProps) {
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">{user.name}</p>
-                  <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                  <p className="text-sm font-medium leading-none">
+                    {user.name}
+                  </p>
+                  <p className="text-xs leading-none text-muted-foreground">
+                    {user.email}
+                  </p>
+                  <p className="text-xs leading-none text-muted-foreground capitalize">
+                    ({user.userType})
+                  </p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
@@ -98,7 +105,10 @@ export function JobBoardHeader({ user }: JobBoardHeaderProps) {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+              <DropdownMenuItem
+                onClick={handleLogout}
+                className="cursor-pointer"
+              >
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Log out</span>
               </DropdownMenuItem>
@@ -107,5 +117,5 @@ export function JobBoardHeader({ user }: JobBoardHeaderProps) {
         </div>
       </div>
     </header>
-  )
+  );
 }

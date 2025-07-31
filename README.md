@@ -10,27 +10,21 @@ Organizations can post internship roles.
 
 A basic keyword-matching system helps organizations find suitable interns.
 
-This version is built with:
-
-TypeScript for typed JavaScript
-
-HTML and CSS for structure and styling
-
-Vanilla JavaScript/TypeScript (no frameworks) for logic
-
+This version is built with Next.js
 
 ## Live Site
 You can access the platform here:
 (https://intern-link-alpha.vercel.app/)
 
 ## Tech Stack
-TypeScript – Application logic
+FRONT-END:
+Next.js
+Radix UI
+Tailwind
 
-HTML – Structure
-
-CSS – Styling
-
-JavaScript – Compiled from TypeScript
+BACK-END
+database: MongoDB
+Mongoose: ODM layer
 
 ## How to Use
 Open the live link in your browser.

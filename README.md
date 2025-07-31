@@ -1,24 +1,53 @@
 # InternLink landing page
-
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
-
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/olubanjos-projects/v0-intern-link-landing-page)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/qJCeifBd7CY)
 
 ## Overview
+InternLink is a simple web-based platform designed to connect interns with organizations.
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+Interns can sign up, create a profile, and upload their skills/CV.
 
-## Deployment
+Organizations can post internship roles.
 
-Your project is live at:
+A basic keyword-matching system helps organizations find suitable interns.
 
-**[https://vercel.com/olubanjos-projects/v0-intern-link-landing-page](https://vercel.com/olubanjos-projects/v0-intern-link-landing-page)**
+This version is built with:
 
-## Build your app
+TypeScript for typed JavaScript
 
-Continue building your app on:
+HTML and CSS for structure and styling
 
-**[https://v0.dev/chat/projects/qJCeifBd7CY](https://v0.dev/chat/projects/qJCeifBd7CY)**
+Vanilla JavaScript/TypeScript (no frameworks) for logic
 
+
+## Live Site
+You can access the platform here:
+https://your-deployed-link.com
+
+## Tech Stack
+TypeScript – Application logic
+
+HTML – Structure
+
+CSS – Styling
+
+JavaScript – Compiled from TypeScript
+
+## How to Use
+Open the live link in your browser.
+
+Click Get Started.
+
+Sign up as an intern or organization.
+
+Complete the required form.
+
+Start matching with opportunities or candidates.
+
+## Key Features
+Intern sign-up with skills, CV upload, and preferences
+
+Organization role posting with required skills
+
+Keyword-based matching
+
+Clean, responsive UI

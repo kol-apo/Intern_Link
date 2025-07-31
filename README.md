@@ -24,7 +24,7 @@ Tailwind
 
 BACK-END
 database: MongoDB
-Mongoose: ODM layer
+,Mongoose: ODM layer
 
 ## How to Use
 Open the live link in your browser.

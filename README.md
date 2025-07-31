@@ -23,8 +23,8 @@ Radix UI
 Tailwind
 
 BACK-END
-database: MongoDB
-,Mongoose: ODM layer
+database: MongoDB,
+Mongoose: ODM layer
 
 ## How to Use
 Open the live link in your browser.

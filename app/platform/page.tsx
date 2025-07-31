@@ -54,8 +54,14 @@ export default function PlatformPage() {
   }
 
   const handleFormSubmit = (data: InternData | OrganizationData) => {
-    setSubmittedData(data)
-    setCurrentSection("success")
+    if (userType === "intern") {
+      // For interns, redirect to job board
+      window.location.href = "/jobs"
+    } else {
+      // For organizations, show success page with matches
+      setSubmittedData(data)
+      setCurrentSection("success")
+    }
   }
 
   const handleBackToUserType = () => {

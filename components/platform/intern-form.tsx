@@ -65,8 +65,14 @@ export function InternForm({ currentUser, onSubmit, onBack }: InternFormProps) {
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 2000))
 
-    onSubmit(data)
+    // Redirect to job board instead of showing success page
+    toast({
+      title: "Profile Created!",
+      description: "Your profile has been created successfully. Explore available opportunities below.",
+    })
+
     setIsLoading(false)
+    window.location.href = "/jobs"
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
